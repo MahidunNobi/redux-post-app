@@ -13,7 +13,7 @@ function App() {
   })
 console.log(editPost)
   return (
-   <div className='max-w-[400px] mx-auto'> 
+   <div className='max-w-[1012px] mx-auto'> 
     <h1 className="text-6xl mb-6"> Hello There</h1>
 
     {editPost.status ? <EditPost {...editPost} setEditPost={setEditPost} /> : <AddPost />}

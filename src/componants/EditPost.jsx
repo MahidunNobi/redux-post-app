@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { editPost } from '../features/posts/postSlice'
 
 const EditPost = ({status, id, title, description, setEditPost}) => {
     
+    const dispatch = useDispatch()
     const  [editedPost, setEditedPost] = useState({
-        status, id,title,description
+        title,description
     })
 
     function handleUpdatePost(e){
         e.preventDefault()
-        setEditPost({...editedPost, status:false})
+        const {title, description} = editedPost
+        dispatch(editPost({id, title, description}))
+        setEditPost({
+            status: false,
+            id: 0,
+            title: "",
+            description: ""
+        })
     }
 
   return (
-    <div className='min-w-[400px]'>
+    <div className='max-w-[400px] mx-auto'>
         <form action="" className='w-full'>
             <input 
             type="text"
