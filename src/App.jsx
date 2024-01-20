@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import AddPost from './componants/AddPost'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-   <>
-    <h1 className="text-6xl"> Hello There</h1>
-   </>
+   <div className='max-w-[400px] mx-auto'> 
+    <h1 className="text-6xl mb-6"> Hello There</h1>
+    <AddPost />
+   </div>
   )
 }
 
