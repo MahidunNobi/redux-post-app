@@ -15,21 +15,21 @@ const PostForm = ({state, setState, clickFunction}) => {
             rows="5" 
             placeholder='Post Desription'
             className='w-full outline-none border border-amber-600 rounded-md p-4 my-2'
-            onChange={(e)=> setState({...state, description: e.target.value})}
-            value={state.description}
+            onChange={(e)=> setState({...state, body: e.target.value})}
+            value={state.body}
             >
             </textarea>
             <select 
             name="" 
             id="" 
             className='w-full outline-none border border-amber-600 rounded-md p-4 my-2'
-            onChange={(e)=> setState({...state, author: e.target.value})}
-            value={state.author}
+            onChange={(e)=> setState({...state, userId: e.target.value})}
+            value={state.userId}
             >
-              <option value="">Select author</option>
-              <option value="Jhon">Jhon</option>
-              <option value="Linda">Linda</option>
-              <option value="Catherin">Catherin</option>
+              <option value="">Select userId</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
             </select>            
             <button 
             className='w-full outline-none bg-amber-600 hover:bg-amber-500 duration-300 text-white rounded-md p-4 my-2'

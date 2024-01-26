@@ -9,14 +9,14 @@ const EditPost = ({editPost, setEditPost}) => {
 
     function handleUpdatePost(e){
         e.preventDefault()
-        const {id, title, description, author} = editPost
-        dispatch(modifyPost({id, title, description, author}))
+        const {id, title, body, userId} = editPost
+        dispatch(modifyPost({id, title, body, userId}))
         setEditPost({
             status: false,
             id: 0,
             title: "",
-            description: "",
-            author: ""
+            body: "",
+            userId: ""
         })
     }
 

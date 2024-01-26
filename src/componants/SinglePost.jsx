@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from "react-redux";
 import { deletePost } from "../features/posts/postSlice";
 
-const SinglePost = ({id, title, description, author, setEditPost}) => {
+const SinglePost = ({id, title, body, userId, setEditPost}) => {
     const dispatch = useDispatch();
 
   return (
@@ -11,10 +11,10 @@ const SinglePost = ({id, title, description, author, setEditPost}) => {
   >
     <h1 className="text-2xl"> {title}</h1>
     <p className="my-3">
-      {description}
+      {body}
       <span className="italic text-xs text-gray-500">
         by
-        {author ? author : "Unknown author"}
+        {userId ? userId : "Unknown author"}
       </span>
     </p>
     <button
@@ -24,8 +24,8 @@ const SinglePost = ({id, title, description, author, setEditPost}) => {
           status: true,
           id,
           title,
-          description,
-          author: author || "",
+          body,
+          userId: userId || "",
         })
       }
     >

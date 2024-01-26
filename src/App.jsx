@@ -9,8 +9,8 @@ function App() {
     status: false,
     id: 0,
     title: "",
-    description: "",
-    author: "",
+    body: "",
+    userId: "",
   });
   // console.log(editPost)
   return (
