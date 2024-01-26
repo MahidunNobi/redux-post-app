@@ -1,49 +1,31 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addPost } from '../features/posts/postSlice'
+import PostForm from './PostForm'
 
 const AddPost = () => {
   
   const dispatch = useDispatch()
   const [post, setPost] = useState({
     title: "",
-    description: ""
+    description: "",
+    author: ""
   })
 
   function handleCreatePost(e){
     e.preventDefault()
-    dispatch(addPost({title:post.title, description: post.description}))
+    dispatch(addPost(post.title, post.description, post.author))
     setPost({
       title: "",
-      description: ""
+      description: "",
+      author: ""
     })
   }
 
 
   return (
-    <div className='max-w-[400px] mx-auto'>
-        <form action="" className='w-full' onSubmit={handleCreatePost}>
-            <input 
-            type="text"
-            placeholder='Post Title' 
-            className='w-full outline-none border border-amber-600 rounded-md p-4 my-2'
-            onChange={(e)=> setPost({...post, title: e.target.value})}
-            value={post.title}
-            />
-            <textarea 
-            rows="5" 
-            placeholder='Post Desription'
-            className='w-full outline-none border border-amber-600 rounded-md p-4 my-2'
-            onChange={(e)=> setPost({...post, description: e.target.value})}
-            value={post.description}
-            >
-            </textarea>
-            <button 
-            className='w-full outline-none bg-amber-600 hover:bg-amber-500 duration-300 text-white rounded-md p-4 my-2'
-            > 
-            Create Post
-            </button>
-        </form>
+    <div className='max-w-[400px] mx-auto'>      
+        <PostForm state={post} setState={setPost} clickFunction={handleCreatePost} />
     </div>
   )
 }

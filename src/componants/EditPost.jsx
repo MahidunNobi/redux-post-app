@@ -1,52 +1,28 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { editPost } from '../features/posts/postSlice'
+import { modifyPost } from '../features/posts/postSlice'
+import PostForm from './PostForm'
 
-const EditPost = ({status, id, title, description, setEditPost}) => {
+const EditPost = ({editPost, setEditPost}) => {
     
     const dispatch = useDispatch()
-    const  [editedPost, setEditedPost] = useState({
-        title,description
-    })
 
     function handleUpdatePost(e){
         e.preventDefault()
-        const {title, description} = editedPost
-        dispatch(editPost({id, title, description}))
+        const {id, title, description, author} = editPost
+        dispatch(modifyPost({id, title, description, author}))
         setEditPost({
             status: false,
             id: 0,
             title: "",
-            description: ""
+            description: "",
+            author: ""
         })
     }
 
   return (
-    <div className='max-w-[400px] mx-auto'>
-        <form action="" className='w-full'>
-            <input 
-            type="text"
-            placeholder='Post Title' 
-            className='w-full outline-none border border-amber-600 rounded-md p-4 my-2'
-            onChange={(e)=> setEditedPost({...editedPost, title: e.target.value})}
-            value={editedPost.title}
-            />
-            <textarea 
-            rows="5" 
-            placeholder='Post Desription'
-            className='w-full outline-none border border-amber-600 rounded-md p-4 my-2'
-            onChange={(e)=> setEditedPost({...editedPost, description: e.target.value})}
-            value={editedPost.description}
-
-            >
-            </textarea>
-            <button 
-            className='w-full outline-none bg-amber-600 hover:bg-amber-500 duration-300 text-white rounded-md p-4 my-2'
-            onClick={handleUpdatePost}
-            > 
-            Update Post
-            </button>
-        </form>
+    <div className='max-w-[400px] mx-auto'>        
+        <PostForm state={editPost} setState={setEditPost} clickFunction={handleUpdatePost} />
     </div>
   )
 }
