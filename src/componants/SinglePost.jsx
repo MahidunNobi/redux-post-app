@@ -1,9 +1,19 @@
 import React from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "../features/posts/postSlice";
+import { getAllUsers } from '../features/users/usersSlice';
 
 const SinglePost = ({id, title, body, userId, setEditPost}) => {
     const dispatch = useDispatch();
+    const users = useSelector(getAllUsers)
+    const filteredUser = users.filter(user => user.id == userId)
+    const author = userId ? 
+                    filteredUser.length > 0 ?
+                      filteredUser[0].name 
+                      :
+                      "Unknown Author"
+                    : 
+                    "Unknown author"
 
   return (
     <div
@@ -13,8 +23,8 @@ const SinglePost = ({id, title, body, userId, setEditPost}) => {
     <p className="my-3">
       {body}
       <span className="italic text-xs text-gray-500">
-        by
-        {userId ? userId : "Unknown author"}
+      &nbsp; by &nbsp; 
+        {author}
       </span>
     </p>
     <button

@@ -1,6 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllUsers, fetchUsers, getUsersStatus, getUsersError } from '../features/users/usersSlice'
 
 const PostForm = ({state, setState, clickFunction}) => {
+
+  const users = useSelector(getAllUsers)
+  const usersStatus = useSelector(getUsersStatus)
+  // const UsersError = useSelector(getUsersError)
+
+  const dispatch = useDispatch()
+
+useEffect(()=>{
+  if(usersStatus === "idle"){  
+    dispatch(fetchUsers())
+  }
+}, [usersStatus, dispatch])
+
+
   return (
     <div>
         <form action="" className='w-full'>
@@ -26,10 +42,8 @@ const PostForm = ({state, setState, clickFunction}) => {
             onChange={(e)=> setState({...state, userId: e.target.value})}
             value={state.userId}
             >
-              <option value="">Select userId</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option value="">Select Author</option>
+              {users.map(user => <option key={user.id} value={user.id}> {user.name} </option>)}
             </select>            
             <button 
             className='w-full outline-none bg-amber-600 hover:bg-amber-500 duration-300 text-white rounded-md p-4 my-2'
