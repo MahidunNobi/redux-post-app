@@ -12,7 +12,7 @@ function App() {
     body: "",
     userId: "",
   });
-  // console.log(editPost)
+
   return (
     <div className="max-w-[1012px] mx-auto">
       <h1 className="text-6xl mb-6"> Hello There</h1>

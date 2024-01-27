@@ -8,17 +8,17 @@ const AddPost = () => {
   const dispatch = useDispatch()
   const [post, setPost] = useState({
     title: "",
-    description: "",
-    author: ""
+    body: "",
+    userId: ""
   })
 
   function handleCreatePost(e){
     e.preventDefault()
-    dispatch(addPost(post.title, post.description, post.author))
+    dispatch(addPost(post.title, post.body, post.userId))
     setPost({
       title: "",
-      description: "",
-      author: ""
+      body: "",
+      userId: ""
     })
   }
 
