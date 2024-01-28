@@ -1,20 +1,10 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllUsers, fetchUsers, getUsersStatus, getUsersError } from '../features/users/usersSlice'
+import { getAllUsers} from '../features/users/usersSlice'
 
 const PostForm = ({state, setState, clickFunction}) => {
 
   const users = useSelector(getAllUsers)
-  const usersStatus = useSelector(getUsersStatus)
-  // const UsersError = useSelector(getUsersError)
-
-  const dispatch = useDispatch()
-
-useEffect(()=>{
-  if(usersStatus === "idle"){  
-    dispatch(fetchUsers())
-  }
-}, [usersStatus, dispatch])
 
 
   return (
