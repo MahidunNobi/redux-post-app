@@ -7,6 +7,9 @@ const EditPost = ({editPost, setEditPost}) => {
     
     const dispatch = useDispatch()
 
+    const {title, body, userId} = editPost
+    const cansave = [title, body, userId].every(Boolean)
+
     function handleUpdatePost(e){
         e.preventDefault()
         const {id, title, body, userId} = editPost
@@ -22,7 +25,7 @@ const EditPost = ({editPost, setEditPost}) => {
 
   return (
     <div className='max-w-[400px] mx-auto'>        
-        <PostForm state={editPost} setState={setEditPost} clickFunction={handleUpdatePost} />
+        <PostForm state={editPost} setState={setEditPost} clickFunction={handleUpdatePost} cansave={cansave} />
     </div>
   )
 }

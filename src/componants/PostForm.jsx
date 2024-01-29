@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react'
+import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllUsers} from '../features/users/usersSlice'
 
-const PostForm = ({state, setState, clickFunction}) => {
+const PostForm = ({state, setState, clickFunction, cansave}) => {
 
   const users = useSelector(getAllUsers)
-
 
   return (
     <div>
@@ -38,6 +37,7 @@ const PostForm = ({state, setState, clickFunction}) => {
             <button 
             className='w-full outline-none bg-amber-600 hover:bg-amber-500 duration-300 text-white rounded-md p-4 my-2'
             onClick={clickFunction}
+            disabled={!cansave}
             > 
             {state.status ? "Update" : "Create"} Post
             </button>
