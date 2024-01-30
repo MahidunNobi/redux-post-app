@@ -1,7 +1,7 @@
 import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const postUrl = "https://jsonplaceholder.typicode.com/posts?_limit=6"
+const postUrl = "https://jsonplaceholder.typicode.com/posts"
 
 
 
@@ -13,7 +13,7 @@ const initialState = {
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async()=>{
   try {
-    const response = await axios.get(postUrl)
+    const response = await axios.get(`${postUrl}?_limit=6`)
     return response.data
   } catch (error) {
     return error.message
@@ -22,10 +22,21 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async()=>{
 
 export const addNewPost = createAsyncThunk("posts/addNewPosts", async(initialPost)=>{
   try {
-    const response = await axios.post(postUrl, initialPost)
+    const response = await axios.post(`${postUrl}?_limit=6`, initialPost)
     return response.data
   } catch (error) {
     return error.message
+  }
+})
+
+export const updatePost = createAsyncThunk("posts/updatePost", async(initialPost)=>{
+  const {id} = initialPost
+  try {
+    const res = await axios.put(`${postUrl}/${id}`, initialPost)
+    return res.data
+  } catch (error) {
+    // return error.message
+    return initialPost
   }
 })
 
@@ -78,6 +89,10 @@ export const postSlice = createSlice({
         action.payload.userId = Number(action.payload.userId)
         // console.log(action.payload)
         state.posts.unshift(action.payload)        
+      })
+      .addCase(updatePost.fulfilled, (state, action)=>{
+        const {id} = action.payload
+        state.posts = state.posts.map(post => post.id == id ? {...action.payload} : post)
       })
   }
 });
